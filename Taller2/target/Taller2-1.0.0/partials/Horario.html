@@ -1,0 +1,92 @@
+
+
+<div class="panel panel-primary" ng-hide="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de Horario</div>
+    <div class="panel-body">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-click="nuevo()">Nuevo horario</button>
+        </div>
+        <table class="resultados table table-striped">
+            <tr>
+                <th>
+                    Dia
+                </th>
+                <th>
+                    Hora de Inicio
+                </th>
+                <th>
+                    Hora de Fin
+                </th>
+                <th>
+                </th>
+            </tr>
+            <tr ng-repeat="row in lista">
+                <td>{{row.dia}}</td>
+                <td class="row" >{{row.horaInicio| date: "hh:mm a"}}</td>
+                <td class="row">{{row.horaFinal| date: "hh:mm a"}}</td>
+                <td class="row">
+                    <button type="button" class="btn btn-default" ng-click="editar(row)">
+                        <span class="glyphicon glyphicon-pencil"></span>Editar
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="eliminar(row)">
+                        <span class="glyphicon glyphicon-remove"></span>Eliminar
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <br/>
+    </div>
+</div>
+
+<div class="panel panel-primary" ng-show="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de Horario</div>
+    <div class="panel-body">
+
+        <div class="form-group col-md-6" ng-class="errores.dia ? 'error' : ''">
+            <label for="dia">dia</label>
+            <select id="dia" 
+                   class="form-control" 
+                   ng-model="datosFormulario.dia"
+                   placeholder="dia"
+                >
+                <option value="">--Seleccione el dia--</option>
+                <option>Lunes</option>
+                <option>Martes</option>
+                <option>Miércoles</option>
+                <option>Jueves</option>
+                <option>Viernes</option>
+                <option>Sábado</option>
+                <option>Domingo</option>
+            </select>
+            <div ng-show="errores.dia">{{errores.dia}}</div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6" ng-class="errores.horaInicio ? 'error' : ''">
+                <label>Hora inicio</label>
+                <input id="horaInicio" 
+                       class="form-control" 
+                       type="time"
+                       ng-model="datosFormulario.horaInicio"
+                       placeholder="horaInicio"/>
+                <div ng-show="errores.horaInicio">{{errores.horaInicio}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6" ng-class="errores.horaFinal ? 'error' : ''">
+                <label>Hora Final</label>
+                <input id="horaFinal" 
+                       class="form-control" 
+                       type="time"
+                       ng-model="datosFormulario.horaFinal"
+                       placeholder="horaFinal"/>
+                <div ng-show="errores.horaFinal">{{errores.horaFinal}}</div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-click="guardar()">Aceptar</button>
+            <button type="button" class="btn btn-default" ng-click="cancelar()">Cancelar</button>
+        </div>    
+    </div>
+</div>
+
