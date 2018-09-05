@@ -22,8 +22,8 @@
             </tr>
             <tr ng-repeat="row in lista">
                 <td>{{row.dia}}</td>
-                <td class="row" >{{row.horaInicio| date: "hh:mm a"}}</td>
-                <td class="row">{{row.horaFinal| date: "hh:mm a"}}</td>
+                <td class="row" >{{row.horaInicio}}</td>
+                <td class="row">{{row.horaFinal}}</td>
                 <td class="row">
                     <button type="button" class="btn btn-default" ng-click="editar(row)">
                         <span class="glyphicon glyphicon-pencil"></span>Editar
@@ -63,11 +63,11 @@
         <div class="row">
             <div class="form-group col-md-6" ng-class="errores.horaInicio ? 'error' : ''">
                 <label>Hora inicio</label>
-                <input id="horaInicio" 
+                <input id="horaInicio " 
                        class="form-control" 
-                       type="time"
+                       type="text"
                        ng-model="datosFormulario.horaInicio"
-                       placeholder="horaInicio"/>
+                       placeholder="hora Final por favor especifique si es am o pm"/>
                 <div ng-show="errores.horaInicio">{{errores.horaInicio}}</div>
             </div>
         </div>
@@ -76,9 +76,9 @@
                 <label>Hora Final</label>
                 <input id="horaFinal" 
                        class="form-control" 
-                       type="time"
-                       ng-model="datosFormulario.horaFinal"
-                       placeholder="horaFinal"/>
+                       type="text"
+                        ng-model="datosFormulario.horario"                  
+                       placeholder="hora Final por favor especifique si es am o pm"/>
                 <div ng-show="errores.horaFinal">{{errores.horaFinal}}</div>
             </div>
         </div>

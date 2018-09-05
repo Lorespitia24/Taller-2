@@ -21,7 +21,7 @@
             <tr ng-repeat="row in lista">
                 <td>{{row.nombre}}</td>
                 <td class="row">{{row.credito}}</td>
-                <td class="row">{{row.horario}}</td>
+                <td class="row">{{'Dia: '+row.horario.dia +' Hora Inicio: ' +row.horario.horaInicio +' Hora Final: ' +row.horario.horaFinal}}</td>
                 <td class="row">
                     <button type="button" class="btn btn-default" ng-click="editar(row)">
                         <span class="glyphicon glyphicon-pencil"></span>Editar
@@ -65,12 +65,15 @@
            <div class="row">
             <div class="form-group col-md-6" ng-class="errores.horario ? 'error' : ''">
                 <label>Horario</label>
-                <input id="credito" 
+                <select id="horario" 
                        class="form-control" 
-                       type="checkbox"
                        ng-model="datosFormulario.horario"
-                      />
-                       <!-- ng-options="option.dia for option in listaHorario track by option.dia;"-->
+                       ng-options="option.dia + ' hora Inicio: '+option.horaInicio + ' hora final: '+ option.horaFinal for option in listaHorario track by option.id">
+
+                </select>
+                       <!-- 
+                        ng-repeat="horario.object in listaHorario track by horario.dia"
+                       ng-options="option.dia for option in listaHorario track by option.dia;"-->
                 <div ng-show="errores.horario">{{errores.horario}}</div>
             </div>
         </div>

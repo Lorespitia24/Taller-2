@@ -1,6 +1,7 @@
 'use strict';
 
-var listaHorario=[{dia:'Lunes', horaInicio:Date.now(), horaFinal:(Date.now())}];
+var listaHorario=[{dia:'Lunes', horaInicio:'2:00pm', horaFinal:'4:00pm'},
+    {dia:'Martes', horaInicio:'2:00pm', horaFinal:'4:00pm'}];
 
 module.controller('HorarioCtrl', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
     //listar

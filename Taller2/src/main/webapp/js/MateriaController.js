@@ -1,9 +1,8 @@
 'use strict';
 
 var listaMaterias=[{
-        nombre:'Software',credito:2, horario:{dia:'Lunes',horaInicio:Date.now(),horaFinal:Date.now()}
-    }, {
-        nombre:'Software II',credito:2,horario:{dia:'Lunes',horaInicio:Date.now(),horaFinal:Date.now()}
+        nombre:'Software',credito:2, horario:{dia:'Lunes',horaInicio:'10:00 am',horaFinal:'12:00 pm'}}, {
+        nombre:'Software II',credito:2,horario:{dia:'Lunes',horaInicio:'12:00 pm',horaFinal:'2:00 pm'}
     }];
 
 module.controller('MateriaCtrl', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
