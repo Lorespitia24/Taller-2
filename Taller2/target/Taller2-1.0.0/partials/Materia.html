@@ -69,6 +69,7 @@
                        class="form-control" 
                        type="checkbox"
                        ng-model="datosFormulario.horario"
+                       ng-repeat="horario in listaHorario track by horario"
                       />
                        <!-- ng-options="option.dia for option in listaHorario track by option.dia;"-->
                 <div ng-show="errores.horario">{{errores.horario}}</div>
