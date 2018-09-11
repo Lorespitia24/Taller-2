@@ -1,19 +1,34 @@
 'use strict';
 
-var listaFacultades=[{id:1,nombre:'ingenieria'}, {id:2,nombre:'educación'},{id:3,nombre:'musica'}];
+//var listaFacultades=[{id:1,nombre:'ingenieria'}, {id:2,nombre:'educación'},{id:3,nombre:'musica'}];
 
 module.controller('FacultadCtrl', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
     //listar
-    $scope.lista = listaFacultades;
+    $scope.lista = null;
     $scope.id=3;
+    $scope.getFacultad=function(){
+        $http.get("./webresources/ServicioFacultad",{})
+            .then(function(response) {
+                $scope.lista = response.data;
+        }, function(){
+                        alert("error");
+        });
+    }
     
-    $scope.datosFormulario = {};
+    $scope.guardarFacultad=function(){
+        $http.post("./webresources/ServicioFacultad",$scope.datosFacultad)
+            .then(function(response) {
+               $scope.getFacultad(); 
+        });
+    }
+        
+    $scope.datosFacultad = {};
     $scope.panelEditar = false;
     
     //guardar
     $scope.nuevo = function () {
         $scope.panelEditar = true;
-        $scope.datosFormulario = {};
+        $scope.datosFacultad = {};
     };
     
     $scope.guardar = function () {
@@ -23,21 +38,21 @@ module.controller('FacultadCtrl', ['$scope', '$filter', '$http', function ($scop
         if (error)
             return;
         
-        if (!$scope.datosFormulario.id){
-            $scope.datosFormulario.id = $scope.id++;
-            $scope.lista.push($scope.datosFormulario);
+        if (!$scope.datosFacultad.id){
+            $scope.datosFacultad.id = $scope.id++;
+            $scope.lista.push($scope.datosFacultad);
         }
         $scope.panelEditar = false;
     };
     $scope.cancelar = function () {
         $scope.panelEditar = false;
-        $scope.datosFormulario = {};
+        $scope.datosFacultad = {};
     };
 
     //editar
     $scope.editar = function (data) {
         $scope.panelEditar = true;
-        $scope.datosFormulario = data;
+        $scope.datosFacultad = data;
     };
     //eliminar
     $scope.eliminar = function (data){
@@ -50,4 +65,5 @@ module.controller('FacultadCtrl', ['$scope', '$filter', '$http', function ($scop
             }
         }
     };
+     $scope.getFacultad();
 }]);

@@ -6,7 +6,6 @@
 package co.edu.uptc.sw2.proyectoangular;
 
 import co.edu.uptc.sw2.proyectoangular.Entities.Carrera;
-import co.edu.uptc.sw2.proyectoangular.Entities.Estudiante;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;

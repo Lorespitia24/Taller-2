@@ -22,7 +22,7 @@ module.controller('MunicipioCtrl', ['$scope', '$filter', '$http', function ($sco
     }
     
     $scope.guardarMunicipio=function(){
-        $http.post("./webresources/ServicioMunicipio",$scope.datosFormulario)
+        $http.post("./webresources/ServicioMunicipio",$scope.datosMunicipio)
             .then(function(response) {
                $scope.getMunicipio(); 
         });
@@ -32,13 +32,13 @@ module.controller('MunicipioCtrl', ['$scope', '$filter', '$http', function ($sco
         
         //listar
     
-    $scope.datosFormulario = {};
+    $scope.datosMunicipio = {};
     $scope.panelEditar = false;
     
     //guardar
     $scope.nuevo = function () {
         $scope.panelEditar = true;
-        $scope.datosFormulario = {};
+        $scope.datosMunicipio = {};
     };
     
     $scope.guardar = function () {
@@ -48,21 +48,21 @@ module.controller('MunicipioCtrl', ['$scope', '$filter', '$http', function ($sco
         if (error)
             return;
         
-        if (!$scope.datosFormulario.id){
-            $scope.datosFormulario.id = $scope.id++;
-            $scope.lista.push($scope.datosFormulario);
+        if (!$scope.datosMunicipio.id){
+            $scope.datosMunicipio.id = $scope.id++;
+            $scope.lista.push($scope.datosMunicipio);
         }
         $scope.panelEditar = false;
     };
     $scope.cancelar = function () {
         $scope.panelEditar = false;
-        $scope.datosFormulario = {};
+        $scope.datosMunicipio = {};
     };
 
     //editar
     $scope.editar = function (data) {
         $scope.panelEditar = true;
-        $scope.datosFormulario = data;
+        $scope.datosMunicipio = data;
     };
     //eliminar
     $scope.eliminar = function (data){

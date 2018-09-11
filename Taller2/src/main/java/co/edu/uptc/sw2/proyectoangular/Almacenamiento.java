@@ -45,9 +45,13 @@ public class Almacenamiento {
         listaEstudiantes.add(new Estudiante(5, "aa", "a@a.com", "ing software", null));
         listaEstudiantes.add(new Estudiante(6, "aa", "a@a.com", "ing software", null));
 
-        
-        listaCarrera.add(new Carrera(1, "Sistemas", new Facultad(1, "Ingenieria")));
-        listaCarrera.add(new Carrera(1, "Medicina", new Facultad(1, "Salud")));
+        Facultad facultad=new Facultad(1, "Salud");
+        Facultad facultad1=new Facultad(2, "Ingenieria");
+        listaFacultad.add(facultad);
+        listaFacultad.add(facultad1);
+                
+        listaCarrera.add(new Carrera(1, "Sistemas", facultad1));
+        listaCarrera.add(new Carrera(1, "Medicina", facultad));
         
         listaMunicipio.add(new Municipio(1, "Paz del Rio"));
         listaMunicipio.add(new Municipio(2, "Villa de Leyva"));

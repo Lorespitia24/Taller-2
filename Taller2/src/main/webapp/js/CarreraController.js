@@ -1,22 +1,30 @@
 'use strict';
 
-var listaCarreras=[{nombre:'Ingenieria de sistemas', facultad:{id:1,nombre:'ingenieria'}}]
-
+//var listaCarreras=[{nombre:'Ingenieria de sistemas', facultad:{id:1,nombre:'ingenieria'}}]
+var app=angular.module('cursoApp',[]);
 module.controller('CarreraCtrl', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
   
-         $scope.listaCarreras = null;
-    
+    $scope.lista = null;
+    $scope.listaFacultad=null;
     $scope.getCarrera=function(){
         $http.get("./webresources/ServicioCarrera",{})
             .then(function(response) {
-                $scope.listaCarreras = response.data;
+                $scope.lista = response.data;
         }, function(){
                         alert("error");
         });
     }
     
+     $scope.getFacultad=function(){
+        $http.get("./webresources/ServicioFacultad",{})
+            .then(function(response) {
+                $scope.listaFacultad = response.data;
+        }, function(){
+                        alert("error");
+        });
+    }
     $scope.guardarCarrera=function(){
-        $http.post("./webresources/ServicioCarrera",$scope.nuevoEstudiante)
+        $http.post("./webresources/ServicioCarrera",$scope.datosCarrera)
             .then(function(response) {
                $scope.getCarrera(); 
         });
@@ -24,15 +32,15 @@ module.controller('CarreraCtrl', ['$scope', '$filter', '$http', function ($scope
         
         //listar
 //    $scope.lista = listaCarreras;
-    $scope.datosFormulario = {};
+    $scope.datosCarrera = {};
     $scope.panelEditar = false;
     
-    $scope.listaFacultad=listaFacultades;
+//    $scope.listaFacultad=null;
     
     //guardar
     $scope.nuevo = function () {
         $scope.panelEditar = true;
-        $scope.datosFormulario = {};
+        $scope.datosCarrera = {};
     };
     
     $scope.guardar = function () {
@@ -42,21 +50,22 @@ module.controller('CarreraCtrl', ['$scope', '$filter', '$http', function ($scope
         if (error)
             return;
         
-        if (!$scope.datosFormulario.id){
-            $scope.datosFormulario.id = $scope.id++;
-            $scope.lista.push($scope.datosFormulario);
+        if (!$scope.datosCarrera.id){
+            $scope.datosCarrera.id = $scope.id++;
+            $scope.lista.push($scope.datosCarrera);
+            
         }
         $scope.panelEditar = false;
     };
     $scope.cancelar = function () {
         $scope.panelEditar = false;
-        $scope.datosFormulario = {};
+        $scope.datosCarrera = {};
     };
 
     //editar
     $scope.editar = function (data) {
         $scope.panelEditar = true;
-        $scope.datosFormulario = data;
+        $scope.datosCarrera = data;
     };
     //eliminar
     $scope.eliminar = function (data){
@@ -69,4 +78,6 @@ module.controller('CarreraCtrl', ['$scope', '$filter', '$http', function ($scope
             }
         }
     };
+     $scope.getCarrera();
+     $scope.getFacultad();
 }]);

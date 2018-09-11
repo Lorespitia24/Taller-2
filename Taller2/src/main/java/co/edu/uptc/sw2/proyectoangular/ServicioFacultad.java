@@ -5,7 +5,6 @@
  */
 package co.edu.uptc.sw2.proyectoangular;
 
-import co.edu.uptc.sw2.proyectoangular.Entities.Estudiante;
 import co.edu.uptc.sw2.proyectoangular.Entities.Facultad;
 import java.util.List;
 import javax.ws.rs.GET;
