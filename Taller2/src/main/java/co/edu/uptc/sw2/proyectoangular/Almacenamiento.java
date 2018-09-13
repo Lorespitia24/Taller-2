@@ -32,32 +32,44 @@ public class Almacenamiento {
     
     private List<Municipio> listaMunicipio = new ArrayList<Municipio>();
     private List<Matricula> listaMatricula = new ArrayList<Matricula>();
-
+    
+    
     public static Almacenamiento getInstancia() {
         return instancia;
     }
 
     private Almacenamiento() {
+        //lista estudiantes
         listaEstudiantes.add(new Estudiante(1, "aa", "a@a.com", "ing software", null));
         listaEstudiantes.add(new Estudiante(2, "aa", "a@a.com", "ing software", null));
         listaEstudiantes.add(new Estudiante(3, "aa", "a@a.com", "ing software", null));
         listaEstudiantes.add(new Estudiante(4, "aa", "a@a.com", "ing software", null));
         listaEstudiantes.add(new Estudiante(5, "aa", "a@a.com", "ing software", null));
         listaEstudiantes.add(new Estudiante(6, "aa", "a@a.com", "ing software", null));
-
+        
+        //lista profesores
+        listaProfesor.add(new Profesor(1, "Felipe", "Gonzales", 0));
+        listaProfesor.add(new Profesor(2, "Andres", "Gonzales", 1));
+        
+        //lista facultad
         Facultad facultad=new Facultad(1, "Salud");
         Facultad facultad1=new Facultad(2, "Ingenieria");
         listaFacultad.add(facultad);
         listaFacultad.add(facultad1);
-                
+        
+        //lista carrera
         listaCarrera.add(new Carrera(1, "Sistemas", facultad1));
         listaCarrera.add(new Carrera(1, "Medicina", facultad));
         
+        //lista municipio
         listaMunicipio.add(new Municipio(1, "Paz del Rio"));
         listaMunicipio.add(new Municipio(2, "Villa de Leyva"));
         listaMunicipio.add(new Municipio(3, "Tibana"));
-                
-                
+        
+        //lista materias
+        
+        //horarios
+                       
     }
 
     public List<Estudiante> getListaEstudiante() {

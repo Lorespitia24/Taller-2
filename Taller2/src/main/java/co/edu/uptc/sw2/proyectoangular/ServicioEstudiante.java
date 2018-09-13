@@ -11,10 +11,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-/**
- *
- * @author RA302
- */
+
 
 @Path("ServicioEstudiante")
 public class ServicioEstudiante {

@@ -1,25 +1,47 @@
 /* global module */
 
 'use strict';
+var app=angular.module('cursoApp',[]);
 
-var listaProfesores=[{
-        nombre:'Andrea', apellido:'Vargas',
-        documento:'1054094812'},
-{
-        nombre:'Julian', apellido:'Ramirez',
-       documento:'1049263534'}];
+//var listaProfesores=[
+//    {
+ //       nombre:'Andrea', apellido:'Vargas',
+ //       documento:'1054094812'},
+//{
+//        nombre:'Julian', apellido:'Ramirez',
+//       documento:'1049263534'}
+//       ];
 
 module.controller('ProfesorCtrl', ['$scope', '$filter', '$http', 
     function ($scope, $filter, $http) {
     //listar
-    $scope.lista = listaProfesores;
-    $scope.datosFormulario = {};
-    $scope.panelEditar = false;
+    
+    //$scope.profesores = null;
+    $scope.lista = null;
+    
+    $scope.getProfesor=function(){
+        $http.get("./webresources/ServicioProfesor",{})
+            .then(function(response) {
+                $scope.lista = response.data;
+        }, function(){
+                        alert("error");
+        });
+    }
+     $scope.guardarProfesor=function(){
+        $http.post("./webresources/ServicioProfesor",$scope.datosCarrera)
+            .then(function(response) {
+               $scope.getProfesor(); 
+        });
+    }
+    //LISTAR
+    $scope.datosProfesor ={};
+    $scope.panelEditar = false;   
+    
         
     //guardar
     $scope.nuevo = function () {
         $scope.panelEditar = true;
-        $scope.datosFormulario = {};
+        $scope.datosProfesor = {};
     };
     
     $scope.guardar = function () {
@@ -29,21 +51,21 @@ module.controller('ProfesorCtrl', ['$scope', '$filter', '$http',
         if (error)
             return;
         
-        if (!$scope.datosFormulario.id){
-            $scope.datosFormulario.id = $scope.id++;
-            $scope.lista.push($scope.datosFormulario);
+        if (!$scope.datosProfesor.id){
+            $scope.datosProfesor.id = $scope.id++;
+            $scope.lista.push($scope.datosProfesor);
         }
         $scope.panelEditar = false;
     };
     $scope.cancelar = function () {
         $scope.panelEditar = false;
-        $scope.datosFormulario = {};
+        $scope.datosProfesor = {};
     };
 
     //editar
     $scope.editar = function (data) {
         $scope.panelEditar = true;
-        $scope.datosFormulario = data;
+        $scope.datosProfesor = data;
     };
     //eliminar
     $scope.eliminar = function (data){
@@ -56,6 +78,7 @@ module.controller('ProfesorCtrl', ['$scope', '$filter', '$http',
             }
         }
     };
+    $scope.getProfesor();
 }]);
 
 

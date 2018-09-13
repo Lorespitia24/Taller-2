@@ -6,6 +6,7 @@ module.controller('CarreraCtrl', ['$scope', '$filter', '$http', function ($scope
   
     $scope.lista = null;
     $scope.listaFacultad=null;
+    
     $scope.getCarrera=function(){
         $http.get("./webresources/ServicioCarrera",{})
             .then(function(response) {

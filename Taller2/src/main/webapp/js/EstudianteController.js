@@ -15,16 +15,16 @@ module.controller('EstudianteCtrl', ['$scope', '$filter', '$http',
     function ($scope, $filter, $http) {
     //listar
  //   $scope.lista = listaEstudiantes;
-    $scope.datosFormulario = {};
-    $scope.panelEditar = false;
-        
+    //$scope.datosFormulario = {};
     
-    $scope.estudiantes = null;
+    $scope.panelEditar = false; 
+    $scope.lista = null;
+ //   $scope.estudiantes = null;
     
     $scope.getEstudiantes=function(){
         $http.get("./webresources/ServicioEstudiante",{})
             .then(function(response) {
-                $scope.estudiantes = response.data;
+                $scope.lista = response.data;
         }, function(){
                         alert("error");
         });
@@ -36,12 +36,13 @@ module.controller('EstudianteCtrl', ['$scope', '$filter', '$http',
                $scope.getEstudiantes(); 
         });
     }
-    
+    //listar
+    $scope.datosEstudiante = {};
         
     //guardar
     $scope.nuevo = function () {
         $scope.panelEditar = true;
-        $scope.datosFormulario = {};
+        $scope.datosEstudiante = {};
     };
     
     $scope.guardar = function () {
@@ -51,21 +52,21 @@ module.controller('EstudianteCtrl', ['$scope', '$filter', '$http',
         if (error)
             return;
         
-        if (!$scope.datosFormulario.id){
-            $scope.datosFormulario.id = $scope.id++;
-            $scope.lista.push($scope.datosFormulario);
+        if (!$scope.datosEstudiante.id){
+            $scope.datosEstudiante.id = $scope.id++;
+            $scope.lista.push($scope.datosEstudiante);
         }
         $scope.panelEditar = false;
     };
     $scope.cancelar = function () {
         $scope.panelEditar = false;
-        $scope.datosFormulario = {};
+        $scope.datosEstudiante = {};
     };
 
     //editar
     $scope.editar = function (data) {
         $scope.panelEditar = true;
-        $scope.datosFormulario = data;
+        $scope.datosEstudiante = data;
     };
     //eliminar
     $scope.eliminar = function (data){
@@ -78,4 +79,5 @@ module.controller('EstudianteCtrl', ['$scope', '$filter', '$http',
             }
         }
     };
+    $scope.getEstudiantes();
 }]);
