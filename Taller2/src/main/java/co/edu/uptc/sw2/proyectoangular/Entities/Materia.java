@@ -12,10 +12,10 @@ package co.edu.uptc.sw2.proyectoangular.Entities;
 public class Materia {
     private int id;
 private String nombre;
-private String creditos;
+private int creditos;
 private Horario horario;
 
-       public Materia(int id, String nombre, String creditos, Horario horario) {
+       public Materia(int id, String nombre, int creditos, Horario horario) {
         this.id = id;
         this.nombre = nombre;
         this.creditos = creditos;
@@ -47,11 +47,11 @@ private Horario horario;
         this.nombre = nombre;
     }
 
-    public String getCreditos() {
+    public int getCreditos() {
         return creditos;
     }
 
-    public void setCreditos(String creditos) {
+    public void setCreditos(int creditos) {
         this.creditos = creditos;
     }
 

@@ -1,24 +1,49 @@
 'use strict';
 
-var listaMaterias=[{
-        nombre:'Software',credito:2, horario:{dia:'Lunes',horaInicio:'10:00 am',horaFinal:'12:00 pm'}}, {
-        nombre:'Software II',credito:2,horario:{dia:'Lunes',horaInicio:'12:00 pm',horaFinal:'2:00 pm'}
-    }];
+var listaMaterias=[
+//    {
+//        nombre:'Software',credito:2}, {
+//        nombre:'Software II',credito:2
+//    }
+];
 
 module.controller('MateriaCtrl', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
     //listar
-    $scope.lista = listaMaterias;
-    $scope.id=3;
+   $scope.lista = null;
+   $scope.listaHorario = null;
+//    $scope.id=3;
+    $scope.getMateria=function(){
+        $http.get("./webresources/ServicioMateria",{})
+            .then(function(response) {
+                $scope.lista = response.data;
+        }, function(){
+                        alert("error");
+        });
+    }
     
-     $scope.listaHorario=listaHorario;
+     $scope.getHorario=function(){
+        $http.get("./webresources/ServicioHorario",{})
+            .then(function(response) {
+                $scope.listaHorario = response.data;
+        }, function(){
+                        alert("error");
+        });
+    }
     
-    $scope.datosFormulario = {};
+    $scope.guardarMateria=function(){
+        $http.post("./webresources/ServicioMateria",$scope.datosMateria)
+            .then(function(response) {
+               $scope.getMateria(); 
+        });
+    }
+        
+    $scope.datosMateria = {};
     $scope.panelEditar = false;
     
     //guardar
     $scope.nuevo = function () {
         $scope.panelEditar = true;
-        $scope.datosFormulario = {};
+        $scope.datosMateria = {};
     };
     
     $scope.guardar = function () {
@@ -28,21 +53,21 @@ module.controller('MateriaCtrl', ['$scope', '$filter', '$http', function ($scope
         if (error)
             return;
         
-        if (!$scope.datosFormulario.id){
-            $scope.datosFormulario.id = $scope.id++;
-            $scope.lista.push($scope.datosFormulario);
+        if (!$scope.datosMateria.id){
+            $scope.datosMateria.id = $scope.id++;
+            $scope.lista.push($scope.datosMateria);
         }
         $scope.panelEditar = false;
     };
     $scope.cancelar = function () {
         $scope.panelEditar = false;
-        $scope.datosFormulario = {};
+        $scope.datosMateria = {};
     };
 
     //editar
     $scope.editar = function (data) {
         $scope.panelEditar = true;
-        $scope.datosFormulario = data;
+        $scope.datosMateria = data;
     };
     //eliminar
     $scope.eliminar = function (data){
@@ -55,5 +80,6 @@ module.controller('MateriaCtrl', ['$scope', '$filter', '$http', function ($scope
             }
         }
     };
-
+     $scope.getHorario();
+     $scope.getMateria();
 }]);

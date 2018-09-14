@@ -13,13 +13,17 @@ import java.util.Date;
  */
 public class Matricula {
     private  int id;
-    private Date año;
+    private int year;
     private int semestre;
+    private Estudiante estudiante;
+    private Materia materia;
 
-    public Matricula(int id, Date año, int semestre) {
+    public Matricula(int id, int year, int semestre, Estudiante estudiante, Materia materia) {
         this.id = id;
-        this.año = año;
+        this.year = year;
         this.semestre = semestre;
+        this.estudiante = estudiante;
+        this.materia = materia;
     }
 
     public int getId() {
@@ -30,12 +34,12 @@ public class Matricula {
         this.id = id;
     }
 
-    public Date getAño() {
-        return año;
+    public int getYear() {
+        return year;
     }
 
-    public void setAño(Date año) {
-        this.año = año;
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public int getSemestre() {
@@ -45,5 +49,23 @@ public class Matricula {
     public void setSemestre(int semestre) {
         this.semestre = semestre;
     }
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
+    }
+
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
+    }
+
+    
 
 }

@@ -13,11 +13,13 @@ import java.util.Date;
  */
 public class Horario {
     private int id;
+    private String dia;
     private Date horaInicio;
     private Date horaFin;
 
-    public Horario(int id, Date horaInicio, Date horaFin) {
+    public Horario(int id, String dia, Date horaInicio, Date horaFin) {
         this.id = id;
+        this.dia = dia;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
     }
@@ -28,6 +30,14 @@ public class Horario {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
     }
 
     public Date getHoraInicio() {
@@ -45,5 +55,5 @@ public class Horario {
     public void setHoraFin(Date horaFin) {
         this.horaFin = horaFin;
     }
-    
+
 }

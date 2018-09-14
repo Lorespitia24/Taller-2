@@ -14,6 +14,9 @@ import co.edu.uptc.sw2.proyectoangular.Entities.Matricula;
 import co.edu.uptc.sw2.proyectoangular.Entities.Municipio;
 import co.edu.uptc.sw2.proyectoangular.Entities.Profesor;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -40,12 +43,15 @@ public class Almacenamiento {
 
     private Almacenamiento() {
         //lista estudiantes
-        listaEstudiantes.add(new Estudiante(1, "aa", "a@a.com", "ing software", null));
+        Estudiante e1 = new Estudiante(3, "pepito", "a@a.com", "ing software", null);
+        Estudiante e2 = new Estudiante(1, "Juan", "a@a.com", "ing software", null);
+        listaEstudiantes.add(e2);
         listaEstudiantes.add(new Estudiante(2, "aa", "a@a.com", "ing software", null));
         listaEstudiantes.add(new Estudiante(3, "aa", "a@a.com", "ing software", null));
         listaEstudiantes.add(new Estudiante(4, "aa", "a@a.com", "ing software", null));
         listaEstudiantes.add(new Estudiante(5, "aa", "a@a.com", "ing software", null));
         listaEstudiantes.add(new Estudiante(6, "aa", "a@a.com", "ing software", null));
+        listaEstudiantes.add(e1);
         
         //lista profesores
         listaProfesor.add(new Profesor(1, "Felipe", "Gonzales", 0));
@@ -67,8 +73,14 @@ public class Almacenamiento {
         listaMunicipio.add(new Municipio(3, "Tibana"));
         
         //lista materias
+        Materia materia1 = new Materia(1, "Calculo", 2, (new Horario(1,"Lunes", Calendar.getInstance().getTime(), Calendar.getInstance().getTime())));
+        listaMateria.add(materia1);
         
         //horarios
+        
+        
+        listaMatricula.add(new Matricula(1, 2017, 2, e1, materia1));
+        listaMatricula.add(new Matricula(1, 2017, 2, e2, materia1));
                        
     }
 

@@ -1,20 +1,37 @@
 'use strict';
 
-var listaHorario=[{dia:'Lunes', horaInicio:'2:00pm', horaFinal:'4:00pm'},
-    {dia:'Martes', horaInicio:'2:00pm', horaFinal:'4:00pm'}];
+var listaHorario=[
+    //{dia:'Lunes', horaInicio:'2:00pm', horaFinal:'4:00pm'},
+//    {dia:'Martes', horaInicio:'2:00pm', horaFinal:'4:00pm'}
+];
 
 module.controller('HorarioCtrl', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
     //listar
-    $scope.lista = listaHorario;
-    $scope.id=3;
+   $scope.listaHorario = null;
+//    $scope.id=3;
+    $scope.getHorario=function(){
+        $http.get("./webresources/ServicioHorario",{})
+            .then(function(response) {
+                $scope.lista = response.data;
+        }, function(){
+                        alert("error");
+        });
+    }
     
-    $scope.datosFormulario = {};
-    $scope.panelEditar = false;
+    $scope.guardarHorario=function(){
+        $http.post("./webresources/ServicioHorario",$scope.datosHorario)
+            .then(function(response) {
+               $scope.getHorario(); 
+        });
+    }
+        
+    $scope.datosHorario = {};
+    $scope.panelEditarHorario = false;
     
     //guardar
     $scope.nuevo = function () {
-        $scope.panelEditar = true;
-        $scope.datosFormulario = {};
+        $scope.panelEditarHorario = true;
+        $scope.datosHorario = {};
     };
     
     $scope.guardar = function () {
@@ -24,21 +41,21 @@ module.controller('HorarioCtrl', ['$scope', '$filter', '$http', function ($scope
         if (error)
             return;
         
-        if (!$scope.datosFormulario.id){
-            $scope.datosFormulario.id = $scope.id++;
-            $scope.lista.push($scope.datosFormulario);
+        if (!$scope.datosHorario.id){
+            $scope.datosHorario.id = $scope.id++;
+            $scope.lista.push($scope.datosHorario);
         }
-        $scope.panelEditar = false;
+        $scope.panelEditarHorario = false;
     };
     $scope.cancelar = function () {
         $scope.panelEditar = false;
-        $scope.datosFormulario = {};
+        $scope.datosHorario = {};
     };
 
     //editar
     $scope.editar = function (data) {
-        $scope.panelEditar = true;
-        $scope.datosFormulario = data;
+        $scope.panelEditarHorario = true;
+        $scope.datosHorario = data;
     };
     //eliminar
     $scope.eliminar = function (data){
@@ -51,5 +68,6 @@ module.controller('HorarioCtrl', ['$scope', '$filter', '$http', function ($scope
             }
         }
     };
-
+     $scope.getHorario();
 }]);
+

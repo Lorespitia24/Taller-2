@@ -6,44 +6,54 @@ var listaMaterias=[
 //        nombre:'Software II',credito:2
 //    }
 ];
-
-module.controller('MateriaCtrl', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
+var app=angular.module('cursoApp',[]);
+module.controller('MatriculaCtrl', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
     //listar
    $scope.lista = null;
-   $scope.listaHorario = null;
+   $scope.listaEstudiantes=null;
+    $scope.listaMaterias=null;
 //    $scope.id=3;
-    $scope.getMateria=function(){
-        $http.get("./webresources/ServicioMateria",{})
+    $scope.getMatricula=function(){
+        $http.get("./webresources/ServicioMatricula",{})
             .then(function(response) {
                 $scope.lista = response.data;
         }, function(){
                         alert("error");
         });
     }
-    
-     $scope.getHorario=function(){
-        $http.get("./webresources/ServicioHorario",{})
+      $scope.getMateria=function(){
+        $http.get("./webresources/ServicioMateria",{})
             .then(function(response) {
-                $scope.listaHorario = response.data;
+                $scope.listaMaterias = response.data;
         }, function(){
                         alert("error");
         });
     }
     
-    $scope.guardarMateria=function(){
-        $http.post("./webresources/ServicioMateria",$scope.datosMateria)
+
+     $scope.getEstudiante=function(){
+        $http.get("./webresources/ServicioEstudiante",{})
+            .then(function(response) {
+                $scope.listaEstudiantes = response.data;
+        }, function(){
+                        alert("error");
+        });
+    }
+    
+    $scope.guardarMatricula=function(){
+        $http.post("./webresources/ServicioMatricula",$scope.datosMatricula)
             .then(function(response) {
                $scope.getMateria(); 
         });
     }
         
-    $scope.datosMateria = {};
+    $scope.datosMatricula = {};
     $scope.panelEditar = false;
     
     //guardar
     $scope.nuevo = function () {
         $scope.panelEditar = true;
-        $scope.datosMateria = {};
+        $scope.datosMatricula = {};
     };
     
     $scope.guardar = function () {
@@ -53,21 +63,21 @@ module.controller('MateriaCtrl', ['$scope', '$filter', '$http', function ($scope
         if (error)
             return;
         
-        if (!$scope.datosMateria.id){
-            $scope.datosMateria.id = $scope.id++;
-            $scope.lista.push($scope.datosMateria);
+        if (!$scope.datosMatricula.id){
+            $scope.datosMatricula.id = $scope.id++;
+            $scope.lista.push($scope.datosMatricula);
         }
         $scope.panelEditar = false;
     };
     $scope.cancelar = function () {
         $scope.panelEditar = false;
-        $scope.datosMateria = {};
+        $scope.datosMatricula = {};
     };
 
     //editar
     $scope.editar = function (data) {
         $scope.panelEditar = true;
-        $scope.datosMateria = data;
+        $scope.datosMatricula = data;
     };
     //eliminar
     $scope.eliminar = function (data){
@@ -80,6 +90,8 @@ module.controller('MateriaCtrl', ['$scope', '$filter', '$http', function ($scope
             }
         }
     };
-     $scope.getHorario();
-     $scope.getMateria();
+     $scope.getEstudiante();
+        $scope.getMateria();
+        $scope.getMatricula();
+ 
 }]);
