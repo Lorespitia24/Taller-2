@@ -1,17 +1,23 @@
 'use strict';
 
-var listaMaterias=[
-//    {
-//        nombre:'Software',credito:2}, {
-//        nombre:'Software II',credito:2
-//    }
-];
-
 module.controller('MateriaCtrl', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
     //listar
-   $scope.lista = null;
-   $scope.listaHorario = null;
+    $scope.lista = null;
 //    $scope.id=3;
+    
+    $scope.listaCarrera=null;
+    $scope.listaProfesor=null;
+        
+    $scope.datosMateria = {horario:[]};
+    $scope.panelEditar = false;
+
+    
+   
+    //guardar
+    $scope.nuevo = function () {
+        $scope.panelEditar = true;
+        //$scope.datosFormulario = {horario:[]};
+    };
     $scope.getMateria=function(){
         $http.get("./webresources/ServicioMateria",{})
             .then(function(response) {
@@ -21,30 +27,27 @@ module.controller('MateriaCtrl', ['$scope', '$filter', '$http', function ($scope
         });
     }
     
-     $scope.getHorario=function(){
-        $http.get("./webresources/ServicioHorario",{})
+     $scope.getCarrera=function(){
+        $http.get("./webresources/ServicioCarrera",{})
             .then(function(response) {
-                $scope.listaHorario = response.data;
+                $scope.listaCarrera = response.data;
+        }, function(){
+                        alert("error");
+        });
+    }
+     $scope.getProfesor=function(){
+        $http.get("./webresources/ServicioProfesor",{})
+            .then(function(response) {
+                $scope.listaProfesor = response.data;
         }, function(){
                         alert("error");
         });
     }
     
-    $scope.guardarMateria=function(){
-        $http.post("./webresources/ServicioMateria",$scope.datosMateria)
-            .then(function(response) {
-               $scope.getMateria(); 
-        });
+    $scope.nuevoHorario= function(){
+        $scope.datosHorario = {};
+        $('#modalHorario').modal('show');
     }
-        
-    $scope.datosMateria = {};
-    $scope.panelEditar = false;
-    
-    //guardar
-    $scope.nuevo = function () {
-        $scope.panelEditar = true;
-        $scope.datosMateria = {};
-    };
     
     $scope.guardar = function () {
         $scope.errores = {};
@@ -80,6 +83,21 @@ module.controller('MateriaCtrl', ['$scope', '$filter', '$http', function ($scope
             }
         }
     };
-     $scope.getHorario();
+   
+    $scope.guardarHorario = function(){
+         $http.post("./webresources/ServicioHorario",$scope.datosMateria.horario)
+            .then(function(response) {
+               $scope.getHorario(); 
+        });
+//        $scope.datosMateria.horario.push($scope.datosHorario);
+//        $('#modalHorario').modal('hide');
+    }
+    
+
      $scope.getMateria();
+     $scope.getProfesor();
+      $scope.getCarrera();
 }]);
+
+
+
