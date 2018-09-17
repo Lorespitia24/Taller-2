@@ -85,18 +85,33 @@ module.controller('MateriaCtrl', ['$scope', '$filter', '$http', function ($scope
     };
    
     $scope.guardarHorario = function(){
-         $http.post("./webresources/ServicioHorario",$scope.datosMateria.horario)
-            .then(function(response) {
-               $scope.getHorario(); 
-        });
-//        $scope.datosMateria.horario.push($scope.datosHorario);
-//        $('#modalHorario').modal('hide');
-    }
-    
+//         $http.post("./webresources/ServicioHorario",$scope.datosMateria.horario)
+//            .then(function(response) {
+//               $scope.getHorario(); 
+//        });
+//$scope.errores = {};
+//        var error = false;
+//        
+//        if (error)
+//            return;
+//        
+//        if (!$scope.datosHorario.id){
+//            $scope.datosHorario.id = $scope.id++;
+////             $('#modalHorario').modal('hide');
+//            $scope.datosMateria.horario.push($scope.datosHorario);
+//        }
+//        $scope.panelEditar = false;
 
+
+        $scope.datosMateria.horario.push($scope.datosHorario);
+        $('#modalHorario').modal('hide');
+        $scope.getHorario();
+    
+    }
      $scope.getMateria();
      $scope.getProfesor();
       $scope.getCarrera();
+//      $scope.getHorario();
 }]);
 
 
